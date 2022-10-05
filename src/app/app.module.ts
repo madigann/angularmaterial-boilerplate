@@ -1,31 +1,34 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MaterialModule } from './shared/material.module';
-import { FormsModule } from '@angular/forms';
-import { RouterModule, Routes } from '@angular/router';
+
+import {FlexLayoutModule} from '@angular/flex-layout';
+import { Routes, RouterModule } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
+
 
 const routes: Routes = [
   {
     path: 'contactmanager',
     loadChildren: () => import('./contactmanager/contactmanager.module').then(m => m.ContactmanagerModule)
   },
-  {
-    path:'**', redirectTo:'contactmanager' //wild card
-  }
-]
+  {path: '**', redirectTo: 'contactmanager'}
+];
+
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
     BrowserModule,
+    AppRoutingModule,
     BrowserAnimationsModule,
-    MaterialModule,
     RouterModule.forRoot(routes),
-    FormsModule
+    FlexLayoutModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
